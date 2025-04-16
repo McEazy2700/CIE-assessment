@@ -31,8 +31,7 @@ class Category(models.Model):
         return self.name
 
     def save(self, *args: Any, **kwargs: dict[str, Any]):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
 
         super(Category, self).save(*args, **kwargs)
 
@@ -54,9 +53,8 @@ class Product(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args: Any, **kwargs: dict[str, Any]):
-        if not self.slug:
-            slug_base = slugify(self.name)
-            uuid_suffix = str(self.id)[:8]
-            self.slug = f"{slug_base}-{uuid_suffix}"
+        slug_base = slugify(self.name)
+        uuid_suffix = str(self.id)[:8]
+        self.slug = f"{slug_base}-{uuid_suffix}"
 
         super().save(*args, **kwargs)

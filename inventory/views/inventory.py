@@ -6,6 +6,7 @@ from rest_framework.views import Request, Response
 
 from inventory.filters.products import ProductsFilter
 from inventory.models.inventory import Category, Inventory, Product
+from inventory.permissions.inventory import IsProductOwner
 from inventory.serializers.inventory import (
     CategorySerializer,
     InventorySerializer,
@@ -30,7 +31,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsProductOwner]
     serializer_class = ProductSerializer
     filterset_class = ProductsFilter
     search_fields = ["name"]

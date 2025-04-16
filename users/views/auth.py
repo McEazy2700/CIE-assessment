@@ -20,8 +20,8 @@ class AuthViewSet(viewsets.GenericViewSet):
         tags=["auth"],
         request_body=AuthSignUpSerializer,
     )
-    @action(methods=["POST"], detail=False, url_name="sign_up", url_path="sign_up")
-    def sign_up(self, request: Request):
+    @action(methods=["POST"], detail=False, url_name="register", url_path="register")
+    def register(self, request: Request):
         serializer = AuthSignUpSerializer(data=request.data)
         _ = serializer.is_valid(raise_exception=True)
 
@@ -40,8 +40,8 @@ class AuthViewSet(viewsets.GenericViewSet):
         tags=["auth"],
         request_body=AuthLoginSerializer,
     )
-    @action(methods=["POST"], detail=False, url_name="sign_in", url_path="sign_in")
-    def sign_in(self, request: Request):
+    @action(methods=["POST"], detail=False, url_name="login", url_path="login")
+    def login(self, request: Request):
         serializer = AuthLoginSerializer(data=request.data)
         _ = serializer.is_valid(raise_exception=True)
 

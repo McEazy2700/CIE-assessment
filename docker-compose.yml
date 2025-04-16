@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    name: inventory-web
+    command: sh /app/includes/scripts/${RUN_SCRIPT}
+    volumes:
+      - .:/app
+    ports:
+      - "${EXT_BACKEND_PORT}:${BACKEND_PORT}"
+    env_file:
+      - .env
+    depends_on:
+      inventory-db:
+        condition: service_healthy
+    networks:
+      - inventory_network
+
+  db:
+    name: inventory-db
+    restart: unless-stopped
+    image: postgres:14
+    env_file:
+      - .env
+    ports:
+      - "${EXT_DB_PORT}:${DB_PORT}"
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db_data:
+
+networks:
+  inventory_network:
+    external: true

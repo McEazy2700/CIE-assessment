@@ -100,14 +100,16 @@ python manage.py runserver
 - Admin Panel: http://localhost:8080/admin/
 
 ### API Endpoints
-Method | Endpoint | Description
-POST | /users/auth/register/ | User Registration
-POST | /users/auth/login/ | User Login
-GET | /api/products/ | List all user products
-POST | /api/products/ | Create a new product
-GET | /api/products/statistics/ | Inventory statistics
-GET | /api/products/?category=<id> | Filter products by category
-GET | /api/products/?price_min=10&price_max=100 | Filter by price range
-GET | /api/products/?quantity_gt=10 | Filter by quantity
-GET | /api/categories/ | List all categories
-POST | /api/categories/ | Create a category
+
+| Method | Endpoint                                           | Description                         |
+|--------|----------------------------------------------------|-------------------------------------|
+| POST   | `/users/auth/register/`                            | User Registration                   |
+| POST   | `/users/auth/login/`                               | User Login                          |
+| GET    | `/api/products/`                                   | List all user products              |
+| POST   | `/api/products/`                                   | Create a new product                |
+| GET    | `/api/products/statistics/`                        | Inventory statistics                |
+| GET    | `/api/products/?category=<id>`                     | Filter products by category         |
+| GET    | `/api/products/?price_min=10&price_max=100`        | Filter by price range               |
+| GET    | `/api/products/?quantity_gt=10`                    | Filter by quantity                  |
+| GET    | `/api/categories/`                                 | List all categories                 |
+| POST   | `/api/categories/`                                 | Create a category                   |

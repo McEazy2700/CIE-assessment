@@ -96,7 +96,8 @@ python manage.py runserver
 ```
 
 ### Access the API
-- Swagger Docs: http://localhost:8080/api/docs/
+- Swagger Docs: http://localhost:8080/swagger/
+- Redoc Docs: http://localhost:8080/redoc/
 - Admin Panel: http://localhost:8080/admin/
 
 ### API Endpoints

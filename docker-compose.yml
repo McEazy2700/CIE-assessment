@@ -3,22 +3,21 @@ version: "3.9"
 services:
   web:
     build: .
-    name: inventory-web
+    container_name: inverntory-web
     command: sh /app/includes/scripts/${RUN_SCRIPT}
     volumes:
       - .:/app
     ports:
       - "${EXT_BACKEND_PORT}:${BACKEND_PORT}"
-    env_file:
-      - .env
+    env_file: .env
     depends_on:
-      inventory-db:
+      db:
         condition: service_healthy
     networks:
       - inventory_network
 
   db:
-    name: inventory-db
+    container_name: inventory-db
     restart: unless-stopped
     image: postgres:14
     env_file:
@@ -36,10 +35,13 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+    networks:
+      - inventory_network
 
 volumes:
   db_data:
 
 networks:
   inventory_network:
+    driver: bridge
     external: true

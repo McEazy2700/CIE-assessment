@@ -10,7 +10,14 @@ requires-python = ">=3.10"
 dependencies = [
     "django (>=5.2,<6.0)",
     "django-stubs (>=5.1.3,<6.0.0)",
-    "djangorestframework (>=3.16.0,<4.0.0)"
+    "djangorestframework (>=3.16.0,<4.0.0)",
+    "python-decouple (>=3.8,<4.0)",
+    "dj-database-url (>=2.3.0,<3.0.0)",
+    "psycopg2-binary (>=2.9.10,<3.0.0)",
+    "whitenoise (>=6.9.0,<7.0.0)",
+    "django-filter (>=25.1,<26.0)",
+    "drf-yasg[validation] (>=1.21.10,<2.0.0)",
+    "pyjwt[crypto] (>=2.10.1,<3.0.0)"
 ]
 
 
@@ -33,3 +40,4 @@ reportAny = false
 reportIncompatibleMethodOverride = false
 reportExplicitAny = false
 reportUnnecessaryComparison = false
+reportIncompatibleVariableOverride = false

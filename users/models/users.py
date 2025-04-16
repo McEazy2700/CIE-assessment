@@ -1,4 +1,5 @@
 from typing import Any
+import uuid
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
@@ -10,6 +11,7 @@ class CustomUserManager(BaseUserManager["CustomUser"]):
 
     def create_user(self, email: str, password: str, **extra_fields: dict[str, Any]):
         email = self.normalize_email(email)
+        __ = extra_fields.setdefault("is_active", True)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
@@ -33,6 +35,9 @@ class CustomUserManager(BaseUserManager["CustomUser"]):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    id = models.UUIDField(
+        default=uuid.uuid4, primary_key=True, editable=False, unique=True
+    )
     email = models.EmailField(_("email address"), unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
@@ -41,7 +46,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
-    objects = CustomUserManager()
+    objects: CustomUserManager = CustomUserManager()
 
     def __str__(self):
         return self.email

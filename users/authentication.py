@@ -1,3 +1,4 @@
+from django.utils import timezone
 import jwt
 from typing import Any, Optional, cast
 from rest_framework import authentication, exceptions
@@ -20,6 +21,8 @@ class JWTAuthentication(authentication.BaseAuthentication):
         token = TimedAuthToken.objects.filter(token=token).first()
         if not token:
             raise exceptions.AuthenticationFailed("Invalid token")
+        token.last_used = timezone.now()
+        token.save()
 
         jwt.decode(token.token, settings.SECRET_KEY, algorithms=["HS256"])
 

@@ -2,6 +2,8 @@
 
 A Django RESTful API for managing product inventories, built as part of a technical assessment. Each user has their own isolated inventory, with full CRUD functionality for products and categories, advanced filtering, and a basic statistics endpoint.
 
+View (ERD)[https://dbdiagram.io/d/CIE-asssment-678baabd6b7fa355c349d4a8]
+
 ## ✅ Features
 
 - JWT-based User Authentication (Register & Login)
